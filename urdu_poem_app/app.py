@@ -9,8 +9,10 @@ from PIL import Image
 from io import BytesIO
 from urllib.parse import urljoin, urlparse
 import re
+import logging
 
 app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
 
 # Database setup
 def init_db():
@@ -147,3 +149,9 @@ def index():
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
+else:
+    # For Vercel deployment
+    init_db()
+
+# For Vercel deployment
+application = app
